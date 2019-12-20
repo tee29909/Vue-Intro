@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+        <div id="app4">
+                <input type="number"  v-model="number1">
+                +
+                <input type="number"  v-model="number2">
+                =
+                <span>{{ sum }}</span>
+                
+            </div>
+    <script>
+     new Vue({
+            el: '#app4',
+            data: {
+                number1:0,
+                number2:0,
+                result:0
+
+            },
+            methods:{
+               
+
+            },
+            computed:{
+                sum:function(){
+                   return this.result=parseInt(this.number1)+parseInt(this.number2);
+                }
+            }
+            
+        });</script>
+</body>
+</html>

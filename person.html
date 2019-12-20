@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="app5">
+
+    
+    <input v-model="person.name" type="text" placeholder="You Name">
+    <br>
+    <input v-model="person.sername" type="text" placeholder="You Sername">
+    <br>
+    <input v-model="person.age" type="number" placeholder="You age">
+    <br>
+    <input type="radio" id="Mail" value="Mail" v-model="person.gender">Mail
+    <input type="radio" id="Femail" value="Femail" v-model="person.gender">Femail
+    <br>
+
+    <input type="checkbox" id="Dog" value="Dog" v-model="person.pets">Dog
+    <input type="checkbox" id="Cat"value="Cat" v-model="person.pets">Cat
+    <input type="checkbox" id="Bird"value="Bird" v-model="person.pets">Bird
+    <br>
+    <select v-model="person.role">
+            <option disabled value="">select Row</option>
+            <option value="Admin">Admin</option>
+            <option value="Admin">User</option>
+            
+    </select>
+    <br>
+    <span>
+{{person}}
+
+    </span>
+
+    
+    
+</div>
+
+
+
+
+
+
+    <script>
+         new Vue({
+            el: '#app5',
+            data: {
+
+                person:{
+                    name:'',
+                sername:'',
+                age:'',
+                gender:'',
+                pets:[],
+                role:''
+                }
+                
+
+            },
+            methods:{
+               
+
+            },
+            computed:{
+                sum:function(){
+                   return this.result=parseInt(this.number1)+parseInt(this.number2);
+                }
+            }
+            
+        });
+    </script>
+</body>
+</html>
