@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    
+    
+    <div id="app">
+      <input type="radio" id="animal" value="animal" v-model="loveType" />animal
+      <input type="radio" id="flower" value="flower" v-model="loveType" />flower
+      <br />
+
+      <input type="checkbox" id="Dog" value="Dog" v-model="person.pets" />Dog
+      <input type="checkbox" id="Cat" value="Cat" v-model="person.pets" />Cat
+      <input type="checkbox" id="Bird" value="Bird" v-model="person.pets" />Bird
+      <br />
+
+      Love Type:
+
+
+      <span>
+        {{loveType}}
+      </span>
+    </div>
+
+    <script>
+       new Vue({
+        el: "#app",
+        data: {
+          loveType: 'asdsad',
+          lovelist: 'asdasdsa'
+        },
+
+        computed: {
+         
+        }
+
+       
+      });
+    </script>
+  </body>
+</html>
