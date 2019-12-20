@@ -19,6 +19,15 @@
         </a>
 
     </div>
+    <button v-on:click="count++" id="app3"> {{ count }}</button>
+    <div id="app4">
+    <input type="number"  v-model="number1">
+    +
+    <input type="number"  v-model="number2">
+    =
+    <span>{{ sum }}</span>
+    
+</div>
     <script>
         var app = new Vue({
             el: '#app',
@@ -32,6 +41,54 @@
                 googleName: 'google',
                 googleLine: 'https://www.google.com'
             }
+        });
+        new Vue({
+            el: '#app3',
+            data: {
+                count:0
+            }
+        });
+        new Vue({
+            el: '#app4',
+            data: {
+                number1:0,
+                number2:0,
+                result:0
+
+            },
+            methods:{
+               
+
+            },
+            computed:{
+                sum:function(){
+                   return this.result=parseInt(this.number1)+parseInt(this.number2);
+                }
+            }
+            
+        });
+
+
+
+
+        new Vue({
+            el: '#app5',
+            data: {
+                naem:0,
+                number2:0,
+                result:0
+
+            },
+            methods:{
+               
+
+            },
+            computed:{
+                sum:function(){
+                   return this.result=parseInt(this.number1)+parseInt(this.number2);
+                }
+            }
+            
         });
     </script>
 
