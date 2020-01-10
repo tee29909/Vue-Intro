@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <title>Hello, world!</title>
+</head>
+
+<body>
+    <div id="app" class="container">
+        <!-- Content here -->
+        <form>
+            <div class="form-group">
+                <input v-if="todo==null" @keydown.enter.prevent="addTodo" type="text" class="form-control" id="textTodo"
+                    placeholder="สิ่งที่ต้องทำ">
+                <input v-else @keydown.enter.prevent="editTodo" type="text" class="form-control" id="textTodo" :value="todo.text"
+                    placeholder="แก่ไข">
+            </div>
+        </form>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </nav>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Todo</th>
+                    <th scope="col">Operation</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(Todo,index) in Todos">
+                    <th scope="row">{{index+1}}</th>
+                    <td>{{Todo.text}}</td>
+                    <td>
+                        <button @click="editOperation(Todo)" type="button" class="btn btn-warning">edit</button>
+                        <button @click="deleteOperation(Todo)" type="button" class="btn btn-danger">delete</button>
+                    </td>
+
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                lastID: 3,
+                todo: null,
+                Todos: [
+                    {
+                        id: 1,
+                        text: 'ล้างจาน'
+                    }, {
+                        id: 2,
+                        text: 'rov'
+                    },
+                    {
+                        id: 3,
+                        text: 'นอน'
+                    }
+
+
+                ],
+            },
+            methods: {
+                addTodo: function (event) {
+                    var newTodo = {
+                        id: this.lastID++,
+                        text: event.target.value
+                    };
+                    this.Todos.push(newTodo);
+                    event.target.value = "";
+
+
+                },
+                editOperation: function (todo) {
+                    this.todo = todo;
+                    console.log(todo);
+                },
+                editTodo: function (event) {
+                    this.todo.text = event.target.value; 
+
+                    this.todo=null;
+                    
+                },
+                deleteOperation: function (event) {
+                    var index = this.Todos.findIndex(t => t.id == event.id);
+                    this.Todos.splice(index,1);
+                    
+                },
+                
+            }
+
+        });
+    </script>
+</body>
+
+</html>
