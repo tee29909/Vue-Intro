@@ -17,7 +17,7 @@
     <label for="animal">Animal</label>
     <input type="radio" id="flower" value="Flower" v-model="loveType" />
     <label for="flower">Flower</label>
-    
+
 
     <template v-if="isloveTypeAnimel">
       <br />
@@ -41,15 +41,15 @@
       <input type="checkbox" id="Mali" value="Mali" v-model="lovelist" />
       <label for="Mali">Mali</label>
       <br />
-      
+
     </template>
-    
+
     <template v-else>
       <div>
-          Please select one!!
+        Please select one!!
       </div>
     </template>
-    
+
 
 
     <span>
@@ -80,21 +80,21 @@
       },
 
       computed: {
-        getLoveListLength:function(){
+        getLoveListLength: function () {
           return this.lovelist.length;
         },
-        isloveTypeAnimel: function(){
-          return this.loveType=='Animal'
+        isloveTypeAnimel: function () {
+          return this.loveType == 'Animal'
 
         },
-        isloveTypeFlower: function(){
-          return this.loveType=='Flower'
+        isloveTypeFlower: function () {
+          return this.loveType == 'Flower'
 
         }
 
       },
-      watch: {    
-        loveType:function(newValue, oldValue){
+      watch: {
+        loveType: function (newValue, oldValue) {
           this.lovelist = [];
         }
       }
