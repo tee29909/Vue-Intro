@@ -40,6 +40,9 @@
                     <th scope="col">#</th>
                     <th scope="col">Todo</th>
                     <th scope="col">Operation</th>
+                    <th scope="col">
+                        <button v-if="Todos==null" @click="addNew(Todo)" type="button" class="btn btn-success">Add new</button>
+                    </th>
 
                 </tr>
             </thead>
@@ -118,6 +121,10 @@
                 deleteOperation: function (event) {
                     var index = this.Todos.findIndex(t => t.id == event.id);
                     this.Todos.splice(index,1);
+                    
+                },
+                addNew: function () {
+                    this.Todos = null;
                     
                 },
                 
