@@ -21,17 +21,20 @@
             <div class="form-group">
                 <input v-if="todo==null" @keydown.enter.prevent="addTodo" type="text" class="form-control" id="textTodo"
                     placeholder="สิ่งที่ต้องทำ">
+
                 <input v-else @keydown.enter.prevent="editTodo" type="text" class="form-control" id="textTodo" :value="todo.text"
                     placeholder="แก่ไข">
             </div>
         </form>
         <nav aria-label="Page navigation example">
             <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                <li class="page-item" v-if="pageNumber!=0">
+                    <a class="page-link" @click="pageNumber--" href="#">Previous</a></li>
+                <li class="page-item"  v-for="page in getNumberOfpage">
+                    <a @click="pageNumber=page-1" class="page-link" href="#">{{page}}</a></li>
+                
+                <li class="page-item" v-if="pageNumber!=getNumberOfpage-1">
+                    <a @click="pageNumber++" class="page-link" href="#">Next</a></li>
             </ul>
         </nav>
         <table class="table table-striped">
@@ -47,14 +50,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(Todo,index) in Todos">
+                <tr v-for="(Todo,index) in getTodoByPaging">
                     <th scope="row">{{index+1}}</th>
                     <td>{{Todo.text}}</td>
                     <td>
                         <button @click="editOperation(Todo)" type="button" class="btn btn-warning">edit</button>
                         <button @click="deleteOperation(Todo)" type="button" class="btn btn-danger">delete</button>
                     </td>
-5555
+
 
                 </tr>
 
@@ -82,6 +85,8 @@
             data: {
                 lastID: 3,
                 todo: null,
+                pageSize: 3,
+                pageNumber:0,
                 Todos: [
                     {
                         id: 1,
@@ -124,11 +129,22 @@
                     this.Todos.splice(index,1);
                     
                 },
+
                 addNew: function () {
                     this.Todos = null;
                     
                 },
-                
+            },
+            computed:{
+                getTodoByPaging:function(){
+                    var begin =this.pageNumber*this.pageSize;
+                    var end = begin + this.pageSize;
+                    return this.Todos.splice(begin,end);
+                },
+
+                getNumberOfpage:function(){
+                    return Math.ceil(this.Todos.length/this.pageSize);
+                }
             }
 
         });
