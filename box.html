@@ -12,17 +12,23 @@
 <body>
     <div id="app">
 
-        <button v-on:click="addbox(color)" v-for="color in colors" v-bind:style="{backgroundColor: color}">
+        <button @click="addbox(color)" v-for="color in colors" v-bind:style="{backgroundColor: color}">
             {{color}}
         </button>
         <template v-if="boxs.length==0">
-            <div >
+            <div>
                 No box
             </div>
         </template>
         <template v-else>
-            <div v-bind:style="{position: 'relative', width: '150px',borderStyle:'solid',borderWidth: '1px',backgroundColor: box.color}" 
-            v-for="(box,index) in boxs" v-bind:key="box.id">{{box.id}}.{{box.color}}</div>
+            <div :style="{position: 'relative', width: '150px',borderStyle:'solid',borderWidth: '1px',backgroundColor: box.color}"
+                v-for="(box,index) in boxs" :key="box.id">{{box.id}}.{{box.color}}
+                <samp style="position: absolute; right: 0;">
+                    <button @click="delBox(index)">-</button>
+                    <button @click="upBox(index)" v-if="index!=0">^</button>
+                    <button @click="dowBox(index)" v-if="index!=boxs.length-1">v</button>
+                </samp>
+            </div>
         </template>
 
 
@@ -45,7 +51,20 @@
                         id: this.lastId++,
                         color: color
                     });
+                },
+                delBox: function (index) {
+                    this.boxs.splice(index, 1);
+                },
+                upBox: function (index) {
+                    var temp = [this.boxs[index - 1], this.boxs[index]];
+                    this.boxs.splice(index - 1, 2, temp[1], temp[0]);
+                },
+                dowBox: function (index) {
+                    var temp = [this.boxs[index], this.boxs[index + 1]];
+                    this.boxs.splice(index, 2, temp[1], temp[0]);
                 }
+
+
             }
 
 
