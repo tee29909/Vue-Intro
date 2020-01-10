@@ -1,47 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  </head>
-  <body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+
+  <div id="app">
+    <input type="radio" id="animal" value="Animal" v-model="loveType" />
+    <label for="animal">Animal</label>
+    <input type="radio" id="flower" value="Flower" v-model="loveType" />
+    <label for="flower">Flower</label><br />
     
-    
-    <div id="app">
-      <input type="radio" id="animal" value="animal" v-model="loveType" />animal
-      <input type="radio" id="flower" value="flower" v-model="loveType" />flower
-      <br />
 
-      <input type="checkbox" id="Dog" value="Dog" v-model="person.pets" />Dog
-      <input type="checkbox" id="Cat" value="Cat" v-model="person.pets" />Cat
-      <input type="checkbox" id="Bird" value="Bird" v-model="person.pets" />Bird
-      <br />
-
-      Love Type:
+    <template v-if="isloveTypeAnimel">
+      <input type="checkbox" id="Dog" value="Dog" v-model="lovelist" />
+      <label for="Dog">Dog</label>
+      <input type="checkbox" id="Cat" value="Cat" v-model="lovelist" />
+      <label for="Cat">Cat</label>
+      <input type="checkbox" id="Fish" value="Fish" v-model="lovelist" />
+      <label for="Fish">Fish</label>
+    </template>
 
 
-      <span>
-        {{loveType}}
-      </span>
-    </div>
 
-    <script>
-       new Vue({
-        el: "#app",
-        data: {
-          loveType: 'asdsad',
-          lovelist: 'asdasdsa'
+    <template v-if="isloveTypeFlower">
+      <input type="checkbox" id="Rost" value="Rost" v-model="lovelist" />
+      <label for="Rost">Rost</label>
+      <input type="checkbox" id="Lotus" value="Lotus" v-model="lovelist" />
+      <label for="Lotus">Lotus</label>
+      <input type="checkbox" id="Mali" value="Mali" v-model="lovelist" />
+      <label for="Mali">Mali</label>
+    </template>
+    <br />
+
+
+    <span>
+      Love Type:{{loveType}}
+    </span>
+    <br />
+    <span>
+      Love List:{{lovelist}}
+    </span><br />
+    <span>
+      Love List length:{{getLoveListLength}}
+    </span>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        loveType: '',
+        lovelist: []
+      },
+
+      computed: {
+        getLoveListLength:function(){
+          return this.lovelist.length;
         },
+        isloveTypeAnimel: function(){
+          return this.loveType=='Animal'
 
-        computed: {
-         
+        },
+        isloveTypeFlower: function(){
+          return this.loveType=='Flower'
+
         }
 
-       
-      });
-    </script>
-  </body>
+      },
+      watch: {    
+        loveType:function(newValue, oldValue){
+          this.lovelist = [];
+        }
+      }
+
+
+
+    });
+  </script>
+</body>
+
 </html>
