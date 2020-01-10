@@ -16,29 +16,40 @@
     <input type="radio" id="animal" value="Animal" v-model="loveType" />
     <label for="animal">Animal</label>
     <input type="radio" id="flower" value="Flower" v-model="loveType" />
-    <label for="flower">Flower</label><br />
+    <label for="flower">Flower</label>
     
 
     <template v-if="isloveTypeAnimel">
+      <br />
       <input type="checkbox" id="Dog" value="Dog" v-model="lovelist" />
       <label for="Dog">Dog</label>
       <input type="checkbox" id="Cat" value="Cat" v-model="lovelist" />
       <label for="Cat">Cat</label>
       <input type="checkbox" id="Fish" value="Fish" v-model="lovelist" />
       <label for="Fish">Fish</label>
+      <br />
     </template>
 
 
 
-    <template v-if="isloveTypeFlower">
+    <template v-else-if="isloveTypeFlower">
+      <br />
       <input type="checkbox" id="Rost" value="Rost" v-model="lovelist" />
       <label for="Rost">Rost</label>
       <input type="checkbox" id="Lotus" value="Lotus" v-model="lovelist" />
       <label for="Lotus">Lotus</label>
       <input type="checkbox" id="Mali" value="Mali" v-model="lovelist" />
       <label for="Mali">Mali</label>
+      <br />
+      
     </template>
-    <br />
+    
+    <template v-else>
+      <div>
+          Please select one!!
+      </div>
+    </template>
+    
 
 
     <span>
@@ -46,8 +57,15 @@
     </span>
     <br />
     <span>
-      Love List:{{lovelist}}
-    </span><br />
+      Love List: <span v-if="lovelist.length==0">
+        Nothing
+      </span>
+    </span>
+    <ul>
+      <li v-for="Love in lovelist">
+        {{Love}}
+      </li>
+    </ul>
     <span>
       Love List length:{{getLoveListLength}}
     </span>
