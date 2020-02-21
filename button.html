@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+       
+      <bomb-button is-boom='true'></bomb-button> <bomb-button></bomb-button> <bomb-button></bomb-button><br>
+      <bomb-button></bomb-button> <bomb-button></bomb-button> <bomb-button></bomb-button><br>
+      <bomb-button></bomb-button> <bomb-button></bomb-button> <bomb-button></bomb-button><br>
+    </div>
+
+    <script>
+      Vue.component('bomb-button', {
+        data: function() {
+          return {
+            isbomb: true,
+            value: '-'
+          };
+        },
+        methods: {
+          bclick: function() {
+            if (!this.isbomb) return;
+            this.value = '*';
+          }
+        },
+        template: '<button @click="bclick">{{value}}</button>'
+
+      });
+
+      var app = new Vue({
+        el: "#app",
+        data: {}
+      });
+    </script>
+  </body>
+</html>
