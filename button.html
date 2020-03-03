@@ -8,33 +8,71 @@
   </head>
   <body>
     <div id="app">
-       
-      <bomb-button is-boom='true'></bomb-button> <bomb-button></bomb-button> <bomb-button></bomb-button><br>
-      <bomb-button></bomb-button> <bomb-button></bomb-button> <bomb-button></bomb-button><br>
-      <bomb-button></bomb-button> <bomb-button></bomb-button> <bomb-button></bomb-button><br>
+       <div>{{result}} {{click}}</div>
+      <bomb-button :is-bomb="true" @bomb="bomb" @click="clickBomb"></bomb-button> 
+      <bomb-button :is-bomb="false" @bomb="bomb" @click="clickBomb"></bomb-button> 
+      <bomb-button :is-bomb="true" @bomb="bomb"@click="clickBomb"></bomb-button><br>
+
+      <bomb-button :is-bomb="true" @bomb="bomb" @click="clickBomb"></bomb-button> 
+      <bomb-button :is-bomb="false" @bomb="bomb" @click="clickBomb"></bomb-button> 
+      <bomb-button :is-bomb="true" @bomb="bomb" @click="clickBomb"></bomb-button><br>
+
+      <bomb-button :is-bomb="true" @bomb="bomb" @click="clickBomb"></bomb-button> 
+      <bomb-button :is-bomb="false" @bomb="bomb" @click="clickBomb"></bomb-button> 
+      <bomb-button :is-bomb="true" @bomb="bomb" @click="clickBomb"></bomb-button><br>
     </div>
 
+    <script type="text/x-template" id="bomb-button">  
+      <button @click="bclick">{{value}}</button>
+    </script>
+
     <script>
+
+
       Vue.component('bomb-button', {
+        props:{isBomb: Boolean}
+          
+        ,
         data: function() {
           return {
-            isbomb: true,
-            value: '-'
+            
+            value: '-',
+            clicked:false
           };
         },
         methods: {
           bclick: function() {
-            if (!this.isbomb) return;
+            if (this.clicked) return;
+            this.clicked = true;
+            console.log(this.isBomb);
+            this.$emit('click');
+            if (!this.isBomb) return;
             this.value = '*';
+            this.$emit('bomb');
           }
         },
-        template: '<button @click="bclick">{{value}}</button>'
+        template: '#bomb-button'
 
       });
 
       var app = new Vue({
         el: "#app",
-        data: {}
+        data: {
+          result:'',
+          click:0
+        },
+        methods:{
+          clickBomb: function(){
+            this.click++;
+
+          },
+          bomb: function()
+          {
+              console.log("bomb");
+              this.result = "You lost"
+          }
+
+        }
       });
     </script>
   </body>
